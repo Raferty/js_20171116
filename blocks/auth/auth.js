@@ -1,5 +1,3 @@
-'use strict';
-
 import Block from '../block';
 import Input from '../input/input';
 import Button from '../button/button';

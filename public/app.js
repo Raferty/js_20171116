@@ -1131,8 +1131,6 @@ var Auth = function (_View) {
 
         var model = _user2.default.load();
 
-        console.log(model);
-
         if (model) {
             location.href = './' + location.hash;
         } else {
@@ -1354,20 +1352,34 @@ var CreateMsg = function (_Block) {
     _createClass(CreateMsg, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             this.node.innerHTML = (0, _messageCreate2.default)();
 
-            var button = new _button2.default(this.node.querySelector('.js-submit'), {
+            this.button = new _button2.default(this.node.querySelector('.js-submit'), {
                 text: 'Отправить',
                 cssClass: 'button_msg'
             });
 
-            var textarea = new _textarea2.default(this.node.querySelector('.js-textarea'), {
+            this.textarea = new _textarea2.default(this.node.querySelector('.js-textarea'), {
                 placeholder: 'Введите сообщение',
-                rows: 5
+                rows: 5,
+                text: '121212'
             });
 
-            textarea.render();
-            button.render();
+            this.textarea.render();
+            this.button.render();
+
+            this.button.onClick = function () {
+                _this2.send();
+            };
+        }
+    }, {
+        key: 'send',
+        value: function send() {
+            console.log(1212);
+            var message = this.textarea.getValue;
+            console.log(message);
         }
     }]);
 
@@ -1478,7 +1490,7 @@ var Textarea = function (_Block) {
     _createClass(Textarea, [{
         key: 'render',
         value: function render() {
-            this.node.innerHTML = '\n        <textarea class="textarea" rows="' + this.options.rows + '" placeholder="' + this.options.placeholder + '"></textarea>';
+            this.node.innerHTML = '\n        <textarea class="textarea" rows="' + this.options.rows + '" placeholder="' + this.options.placeholder + '" text="' + this.options.text + '"></textarea>';
         }
     }]);
 

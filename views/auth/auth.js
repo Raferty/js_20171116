@@ -14,8 +14,6 @@ export default class Auth extends View {
 
         let model = User.load();
 
-        console.log(model);
-
         if (model) {
             location.href = './' + location.hash;
         } else {

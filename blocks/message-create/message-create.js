@@ -14,18 +14,25 @@ export default class CreateMsg extends Block {
     render() {
         this.node.innerHTML = template();
         
-        let button = new Button(this.node.querySelector('.js-submit'), {
+        this.button = new Button(this.node.querySelector('.js-submit'), {
             text: 'Отправить',
             cssClass: 'button_msg'
         });
         
-        let textarea = new Textarea(this.node.querySelector('.js-textarea'), {
+        this.textarea = new Textarea(this.node.querySelector('.js-textarea'), {
             placeholder: 'Введите сообщение',
-            rows: 5
+            rows: 5,
+            text: '121212'
         });
         
-        textarea.render();
-        button.render();
+        this.textarea.render();
+        this.button.render();
+        
+        this.button.onClick = () => { this.send() };
+    }
+    
+    send() {
+        let message = this.textarea.getValue();
     }
     
 }

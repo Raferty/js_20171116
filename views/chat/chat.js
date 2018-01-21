@@ -10,7 +10,6 @@ export default class Chat extends View {
 
     constructor(node) {
         super(node);
-
         this.node.innerHTML = template();
 
         let model = User.load();

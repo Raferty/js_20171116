@@ -66,15 +66,23 @@ body {
 }
 .chat {
     width: 600px;
+    overflow: hidden;
     margin: 50px auto;
     background: #f2f6f9;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
     border-radius: 5px;
+}
+
+.chat__header {
+    padding: 30px;
+    text-align: right;
+    background: #454754;
 }
 
 .chat__inner {
     border-bottom: 2px solid #fff;
+    padding: 30px;
+	max-height: 500px;
+	overflow-y: scroll;
 }
 .chat__footer {
     padding: 30px;
@@ -84,9 +92,11 @@ body {
     width: 100%;
     padding: 15px;
     border: 1px solid #fff;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
     border-radius: 5px;
+}
+
+.link {
+    color: #fff;
 }
 
 .textarea {
@@ -94,8 +104,6 @@ body {
     width: 100%;
     padding: 15px;
     border: 1px solid #fff;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
     border-radius: 5px;
 }
 
@@ -108,6 +116,13 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     transition: all .6s ease;
+}
+.button_auth {
+    color: #fff;
+    padding: 15px;
+    width: 30%;
+    background: #f0916d;
+    border-radius: 5px;
 }
 
 ::-webkit-input-placeholder {
@@ -140,10 +155,26 @@ body {
 }
 
 .auth {
-    display: block;
+    width: 600px;
+    padding: 30px;
+    margin: 50px auto;
+    background: #f2f6f9;
+    border-radius: 5px;
 }
 
 .auth__submit {
     margin-top: 10px;
     text-align: center;
+}
+
+.about {
+    width: 600px;
+    padding: 30px;
+    margin: 50px auto;
+    background: #f2f6f9;
+    border-radius: 5px;
+}
+.about__p {
+    line-height: 130%;
+    color: #45454f;
 }

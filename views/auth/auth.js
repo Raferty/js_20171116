@@ -14,12 +14,17 @@ export default class Auth extends View {
 
         let model = User.load();
 
+        console.log(model);
+
         if (model) {
-            location.href = './#chat';
+            location.href = './' + location.hash;
+        } else {
+            location.href = './#auth';
         }
 
         this.button = new Button(this.node.querySelector('.js-submit'), {
-            text: 'Войти'
+            text: 'Войти',
+            cssClass: 'button_auth'
         });
 
         this.input = new Input(this.node.querySelector('.js-name'), {

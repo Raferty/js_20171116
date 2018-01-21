@@ -15,7 +15,8 @@ export default class CreateMsg extends Block {
         this.node.innerHTML = template();
         
         let button = new Button(this.node.querySelector('.js-submit'), {
-            text: 'Отправить'
+            text: 'Отправить',
+            cssClass: 'button_msg'
         });
         
         let textarea = new Textarea(this.node.querySelector('.js-textarea'), {

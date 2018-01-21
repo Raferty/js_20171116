@@ -10,9 +10,7 @@ export default class Button extends Block {
 
     render() {
         this.node.innerHTML = `
-        <button class="button">
-            ${this.options.text}
-        </button>`;
+        <button class="button ${this.options.cssClass}">${this.options.text}</button>`;
     }
 
     onClick() {}

@@ -10,11 +10,15 @@ export default class Router {
         this.routes = {};
     }
 
-    // Определить текущий, на который пользователь
+    // Определить текущий, на котором пользователь
     start() {
         console.log('start', this.routes);
 
         window.addEventListener('hashchange', () => {
+            this.show(location.hash.replace('#', ''));
+        });
+
+        window.addEventListener('load', () => {
             this.show(location.hash.replace('#', ''));
         });
 

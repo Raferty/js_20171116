@@ -21,8 +21,7 @@ export default class CreateMsg extends Block {
         
         this.textarea = new Textarea(this.node.querySelector('.js-textarea'), {
             placeholder: 'Введите сообщение',
-            rows: 5,
-            text: '121212'
+            rows: 5
         });
         
         this.textarea.render();

@@ -325,7 +325,7 @@ function pug_rethrow(err, filename, lineno, str){
     throw err;
   }
   try {
-    str = str || __webpack_require__(26).readFileSync(filename, 'utf8')
+    str = str || __webpack_require__(27).readFileSync(filename, 'utf8')
   } catch (ex) {
     pug_rethrow(err, null, lineno)
   }
@@ -629,7 +629,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(16);
+var	fixUrls = __webpack_require__(17);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1035,7 +1035,7 @@ var _view = __webpack_require__(3);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _about = __webpack_require__(21);
+var _about = __webpack_require__(22);
 
 var _about2 = _interopRequireDefault(_about);
 
@@ -1095,7 +1095,7 @@ var _view = __webpack_require__(3);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _auth = __webpack_require__(22);
+var _auth = __webpack_require__(23);
 
 var _auth2 = _interopRequireDefault(_auth);
 
@@ -1195,7 +1195,7 @@ var _view = __webpack_require__(3);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _chat = __webpack_require__(23);
+var _chat = __webpack_require__(24);
 
 var _chat2 = _interopRequireDefault(_chat);
 
@@ -1326,11 +1326,11 @@ var _button = __webpack_require__(4);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _messageCreate = __webpack_require__(19);
+var _messageCreate = __webpack_require__(20);
 
 var _messageCreate2 = _interopRequireDefault(_messageCreate);
 
-__webpack_require__(24);
+__webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1393,11 +1393,15 @@ var _block = __webpack_require__(0);
 
 var _block2 = _interopRequireDefault(_block);
 
-var _message = __webpack_require__(20);
+var _message = __webpack_require__(21);
 
 var _message2 = _interopRequireDefault(_message);
 
-__webpack_require__(25);
+__webpack_require__(26);
+
+var _data = __webpack_require__(16);
+
+var _data2 = _interopRequireDefault(_data);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1421,10 +1425,11 @@ var Message = function (_Block) {
     _createClass(Message, [{
         key: 'render',
         value: function render() {
+            this.data = new _data2.default();
+            var data = this.data.getData();
+
             this.node.innerHTML = (0, _message2.default)({
-                user: "Василий Пупкин",
-                message: "Lorem123 4123  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
+                data: data
             });
         }
     }]);
@@ -1528,6 +1533,65 @@ window.addEventListener('DOMContentLoaded', function () {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Data = function () {
+    function Data() {
+        _classCallCheck(this, Data);
+
+        this.data = {};
+    }
+
+    _createClass(Data, [{
+        key: "getData",
+        value: function getData() {
+
+            var messageList = [{
+                user: "Василий Пупкин",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: false
+            }, {
+                user: "Вы",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: true
+            }, {
+                user: "Василий Пупкин",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: false
+            }, {
+                user: "Василий Пупкин",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: false
+            }, {
+                user: "Вы",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: true
+            }];
+
+            this.data = messageList;
+
+            return this.data;
+        }
+    }]);
+
+    return Data;
+}();
+
+exports.default = Data;
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /**
  * When source maps are enabled, `style-loader` uses a link element with a data-uri to
  * embed the css on the page. This breaks all relative urls because now they are relative to a
@@ -1617,7 +1681,7 @@ module.exports = function (css) {
 };
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(false);
@@ -1631,7 +1695,7 @@ exports.push([module.i, ".message-create__submit {\n  margin-top: 10px;\n  text-
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(false);
@@ -1645,7 +1709,7 @@ exports.push([module.i, ".message {\n  margin-bottom: 30px; }\n\n.message__heade
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(1);
@@ -1654,34 +1718,47 @@ function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_ht
 module.exports = template;
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var pug = __webpack_require__(1);
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (isOwner, message, user) {pug_mixins["messageItemRecieve"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Cdiv class=\"message message_receive\"\u003E\u003Cdiv class=\"message__header\"\u003E" + (pug.escape(null == (pug_interp = user) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Cdiv class=\"message__body\"\u003E" + (pug.escape(null == (pug_interp = message) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
-};
-pug_mixins["messageItemSend"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Cdiv class=\"message message_send\"\u003E\u003Cdiv class=\"message__header\"\u003E" + (pug.escape(null == (pug_interp = user) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Cdiv class=\"message__body\"\u003E" + (pug.escape(null == (pug_interp = message) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
-};
-if (isOwner) {
-pug_mixins["messageItemRecieve"]();
-}
-else {
-pug_mixins["messageItemSend"]();
-}}.call(this,"isOwner" in locals_for_with?locals_for_with.isOwner:typeof isOwner!=="undefined"?isOwner:undefined,"message" in locals_for_with?locals_for_with.message:typeof message!=="undefined"?message:undefined,"user" in locals_for_with?locals_for_with.user:typeof user!=="undefined"?user:undefined));;return pug_html;};
-module.exports = template;
-
-/***/ }),
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(1);
 
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (text) {pug_html = pug_html + "\u003Cdiv class=\"about\"\u003E\u003Cp class=\"about__p\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E";}.call(this,"text" in locals_for_with?locals_for_with.text:typeof text!=="undefined"?text:undefined));;return pug_html;};
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (data) {pug_mixins["messageItemRecieve"] = pug_interp = function(msg){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cdiv class=\"message message_receive\"\u003E\u003Cdiv class=\"message__header\"\u003E" + (pug.escape(null == (pug_interp = msg.user) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Cdiv class=\"message__body\"\u003E" + (pug.escape(null == (pug_interp = msg.message) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["messageItemSend"] = pug_interp = function(msg){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cdiv class=\"message message_send\"\u003E\u003Cdiv class=\"message__header\"\u003E" + (pug.escape(null == (pug_interp = msg.user) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Cdiv class=\"message__body\"\u003E" + (pug.escape(null == (pug_interp = msg.message) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+};
+// iterate data
+;(function(){
+  var $$obj = data;
+  if ('number' == typeof $$obj.length) {
+      for (var pug_index0 = 0, $$l = $$obj.length; pug_index0 < $$l; pug_index0++) {
+        var msg = $$obj[pug_index0];
+if (msg.isOwner) {
+pug_mixins["messageItemRecieve"](msg);
+}
+else {
+pug_mixins["messageItemSend"](msg);
+}
+      }
+  } else {
+    var $$l = 0;
+    for (var pug_index0 in $$obj) {
+      $$l++;
+      var msg = $$obj[pug_index0];
+if (msg.isOwner) {
+pug_mixins["messageItemRecieve"](msg);
+}
+else {
+pug_mixins["messageItemSend"](msg);
+}
+    }
+  }
+}).call(this);
+}.call(this,"data" in locals_for_with?locals_for_with.data:typeof data!=="undefined"?data:undefined));;return pug_html;};
 module.exports = template;
 
 /***/ }),
@@ -1690,7 +1767,7 @@ module.exports = template;
 
 var pug = __webpack_require__(1);
 
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"auth\"\u003E\u003Cdiv class=\"auth__name js-name\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"auth__submit js-submit\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (text) {pug_html = pug_html + "\u003Cdiv class=\"about\"\u003E\u003Cp class=\"about__p\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E";}.call(this,"text" in locals_for_with?locals_for_with.text:typeof text!=="undefined"?text:undefined));;return pug_html;};
 module.exports = template;
 
 /***/ }),
@@ -1699,17 +1776,26 @@ module.exports = template;
 
 var pug = __webpack_require__(1);
 
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"chat\"\u003E\u003Cdiv class=\"chat__container\"\u003E\u003Cdiv class=\"chat__header\"\u003E\u003Ca class=\"link js-link-about\" href=\"#about\"\u003EAbout chat\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"chat__inner js-list\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"chat__footer js-form\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"auth\"\u003E\u003Cdiv class=\"auth__name js-name\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"auth__submit js-submit\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
 module.exports = template;
 
 /***/ }),
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var pug = __webpack_require__(1);
+
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"chat\"\u003E\u003Cdiv class=\"chat__container\"\u003E\u003Cdiv class=\"chat__header\"\u003E\u003Ca class=\"link js-link-about\" href=\"#about\"\u003EAbout chat\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"chat__inner js-list\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"chat__footer js-form\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+module.exports = template;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(17);
+var content = __webpack_require__(18);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1734,13 +1820,13 @@ if(false) {
 }
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(18);
+var content = __webpack_require__(19);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1765,7 +1851,7 @@ if(false) {
 }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 /* (ignored) */

@@ -1,14 +1,15 @@
-mixin messageItemRecieve()
-    div.message.message_receive
-        div.message__header= user
-        div.message__body= message
-        
-mixin messageItemSend()
-    div.message.message_send
-        div.message__header= user
-        div.message__body= message
+mixin messageItemRecieve(msg)
+	div.message.message_receive
+		div.message__header= msg.user
+		div.message__body= msg.message
 
-if isOwner
-    +messageItemRecieve()
-else
-    +messageItemSend()
+mixin messageItemSend(msg)
+	div.message.message_send
+		div.message__header= msg.user
+		div.message__body= msg.message
+
+for msg in data
+	if msg.isOwner
+		+messageItemRecieve(msg)
+	else
+		+messageItemSend(msg)

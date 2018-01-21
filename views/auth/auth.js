@@ -46,7 +46,6 @@ export default class Auth extends View {
             return;
         }
 
-
         let model = new User(name);
         model.save();
 

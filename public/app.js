@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -507,6 +507,80 @@ exports.default = Button;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Data = function () {
+    function Data() {
+        _classCallCheck(this, Data);
+
+        this.data = [];
+    }
+
+    _createClass(Data, [{
+        key: "setData",
+        value: function setData(user, message) {
+
+            this.data.push({
+                user: user,
+                message: message
+            });
+
+            console.log(this.data);
+
+            localStorage.setItem('msg', JSON.stringify({
+                data: this.data
+            }));
+        }
+    }, {
+        key: "getData",
+        value: function getData() {
+
+            var messageList = [{
+                user: "Василий Пупкин",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: false
+            }, {
+                user: "Вы",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: true
+            }, {
+                user: "Василий Пупкин",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: false
+            }, {
+                user: "Василий Пупкин",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: false
+            }, {
+                user: "Вы",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                isOwner: true
+            }];
+
+            this.data = messageList;
+
+            return this.data;
+        }
+    }]);
+
+    return Data;
+}();
+
+exports.default = Data;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /*
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
@@ -583,7 +657,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -942,7 +1016,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1021,7 +1095,7 @@ var Router = function () {
 exports.default = Router;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1079,7 +1153,7 @@ var About = function (_View) {
 exports.default = About;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1103,7 +1177,7 @@ var _button = __webpack_require__(4);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _input = __webpack_require__(11);
+var _input = __webpack_require__(12);
 
 var _input2 = _interopRequireDefault(_input);
 
@@ -1179,7 +1253,7 @@ var Auth = function (_View) {
 exports.default = Auth;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1197,11 +1271,11 @@ var _chat = __webpack_require__(24);
 
 var _chat2 = _interopRequireDefault(_chat);
 
-var _messageCreate = __webpack_require__(12);
+var _messageCreate = __webpack_require__(13);
 
 var _messageCreate2 = _interopRequireDefault(_messageCreate);
 
-var _message = __webpack_require__(13);
+var _message = __webpack_require__(14);
 
 var _message2 = _interopRequireDefault(_message);
 
@@ -1247,7 +1321,7 @@ var Chat = function (_View) {
 exports.default = Chat;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1300,7 +1374,7 @@ var Input = function (_Block) {
 exports.default = Input;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1316,13 +1390,21 @@ var _block = __webpack_require__(0);
 
 var _block2 = _interopRequireDefault(_block);
 
-var _textarea = __webpack_require__(14);
+var _textarea = __webpack_require__(15);
 
 var _textarea2 = _interopRequireDefault(_textarea);
 
 var _button = __webpack_require__(4);
 
 var _button2 = _interopRequireDefault(_button);
+
+var _data = __webpack_require__(5);
+
+var _data2 = _interopRequireDefault(_data);
+
+var _user = __webpack_require__(2);
+
+var _user2 = _interopRequireDefault(_user);
 
 var _messageCreate = __webpack_require__(20);
 
@@ -1346,7 +1428,10 @@ var CreateMsg = function (_Block) {
 
         _classCallCheck(this, CreateMsg);
 
-        return _possibleConstructorReturn(this, (CreateMsg.__proto__ || Object.getPrototypeOf(CreateMsg)).call(this, node, options));
+        var _this = _possibleConstructorReturn(this, (CreateMsg.__proto__ || Object.getPrototypeOf(CreateMsg)).call(this, node, options));
+
+        _this.data = new _data2.default();
+        return _this;
     }
 
     _createClass(CreateMsg, [{
@@ -1363,8 +1448,7 @@ var CreateMsg = function (_Block) {
 
             this.textarea = new _textarea2.default(this.node.querySelector('.js-textarea'), {
                 placeholder: 'Введите сообщение',
-                rows: 5,
-                text: '121212'
+                rows: 5
             });
 
             this.textarea.render();
@@ -1377,9 +1461,13 @@ var CreateMsg = function (_Block) {
     }, {
         key: 'send',
         value: function send() {
-            console.log(1212);
-            var message = this.textarea.getValue;
-            console.log(message);
+
+            var user = _user2.default.load();
+            var message = this.textarea.getValue();
+
+            this.data.setData(user.name, message);
+
+            this.textarea.clear();
         }
     }]);
 
@@ -1389,7 +1477,7 @@ var CreateMsg = function (_Block) {
 exports.default = CreateMsg;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1411,7 +1499,7 @@ var _message2 = _interopRequireDefault(_message);
 
 __webpack_require__(26);
 
-var _data = __webpack_require__(16);
+var _data = __webpack_require__(5);
 
 var _data2 = _interopRequireDefault(_data);
 
@@ -1452,7 +1540,7 @@ var Message = function (_Block) {
 exports.default = Message;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1490,7 +1578,17 @@ var Textarea = function (_Block) {
     _createClass(Textarea, [{
         key: 'render',
         value: function render() {
-            this.node.innerHTML = '\n        <textarea class="textarea" rows="' + this.options.rows + '" placeholder="' + this.options.placeholder + '" text="' + this.options.text + '"></textarea>';
+            this.node.innerHTML = '\n        <textarea class="textarea" rows="' + this.options.rows + '" placeholder="' + this.options.placeholder + '"></textarea>';
+        }
+    }, {
+        key: 'getValue',
+        value: function getValue() {
+            return this.node.querySelector('textarea').value;
+        }
+    }, {
+        key: 'clear',
+        value: function clear() {
+            return this.node.querySelector('textarea').value = '';
         }
     }]);
 
@@ -1500,25 +1598,25 @@ var Textarea = function (_Block) {
 exports.default = Textarea;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _router = __webpack_require__(7);
+var _router = __webpack_require__(8);
 
 var _router2 = _interopRequireDefault(_router);
 
-var _auth = __webpack_require__(9);
+var _auth = __webpack_require__(10);
 
 var _auth2 = _interopRequireDefault(_auth);
 
-var _chat = __webpack_require__(10);
+var _chat = __webpack_require__(11);
 
 var _chat2 = _interopRequireDefault(_chat);
 
-var _about = __webpack_require__(8);
+var _about = __webpack_require__(9);
 
 var _about2 = _interopRequireDefault(_about);
 
@@ -1537,65 +1635,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     router.start();
 });
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Data = function () {
-    function Data() {
-        _classCallCheck(this, Data);
-
-        this.data = {};
-    }
-
-    _createClass(Data, [{
-        key: "getData",
-        value: function getData() {
-
-            var messageList = [{
-                user: "Василий Пупкин",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
-            }, {
-                user: "Вы",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: true
-            }, {
-                user: "Василий Пупкин",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
-            }, {
-                user: "Василий Пупкин",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
-            }, {
-                user: "Вы",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: true
-            }];
-
-            this.data = messageList;
-
-            return this.data;
-        }
-    }]);
-
-    return Data;
-}();
-
-exports.default = Data;
 
 /***/ }),
 /* 17 */
@@ -1696,7 +1735,7 @@ module.exports = function (css) {
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -1710,7 +1749,7 @@ exports.push([module.i, ".message-create__submit {\n  margin-top: 10px;\n  text-
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -1815,7 +1854,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(7)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -1846,7 +1885,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(7)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {

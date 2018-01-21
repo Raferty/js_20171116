@@ -10,6 +10,14 @@ export default class Textarea extends Block {
         this.node.innerHTML = `
         <textarea class="textarea" rows="${this.options.rows}" placeholder="${this.options.placeholder}"></textarea>`;
     }
+    
+    getValue() {
+        return this.node.querySelector('textarea').value;
+    }
+    
+    clear() {
+        return this.node.querySelector('textarea').value = '';
+    }
 
 }
 

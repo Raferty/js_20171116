@@ -1,7 +1,21 @@
 export default class Data {
 
     constructor() {
-        this.data = {};
+        this.data = [];
+    }
+    
+    setData(user, message) {
+        
+        this.data.push({
+            user: user,
+            message: message
+        });
+        
+        localStorage.setItem('msg', JSON.stringify({
+            data: this.data
+        }));
+        
+        this.getData();
     }
 
     getData() {

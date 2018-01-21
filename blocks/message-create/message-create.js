@@ -2,6 +2,9 @@ import Block from '../block';
 import Textarea from '../textarea/textarea';
 import Button from '../button/button';
 
+import Data from '../../models/data';
+import User from '../../models/user';
+
 import template from './message-create.pug';
 import './message-create.scss';
 
@@ -9,6 +12,7 @@ export default class CreateMsg extends Block {
     
     constructor(node, options = {}) {
         super(node, options);
+        this.data = new Data();
     }
     
     render() {
@@ -31,7 +35,13 @@ export default class CreateMsg extends Block {
     }
     
     send() {
+        
+        let user = User.load();
         let message = this.textarea.getValue();
+        
+        this.data.setData(user.name, message);
+        
+        this.textarea.clear();
     }
     
 }

@@ -15,10 +15,8 @@ export default class Auth extends View {
         let model = User.load();
 
         if (model) {
-            location.href = './' + location.hash;
-        } else {
-            location.href = './#auth';
-        }
+            location.href = './#chat';
+        }        
 
         this.button = new Button(this.node.querySelector('.js-submit'), {
             text: 'Войти',
@@ -32,7 +30,7 @@ export default class Auth extends View {
 
         this.input.render();
         this.button.render();
-
+        
         this.button.onClick = () => { this.login() };
     }
 
@@ -49,5 +47,15 @@ export default class Auth extends View {
 
         location.href = './#chat';
     }
+
+    /* Logout method */
+    // logout() {
+    //     let model = User.load();
+
+    //     if(model) {
+    //         model.delete();
+    //         location.href = './#auth';
+    //     }
+    // }
 
 }

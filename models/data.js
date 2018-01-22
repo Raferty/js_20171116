@@ -5,51 +5,36 @@ export default class Data {
     }
     
     setData(user, message) {
+
+        let existStorage = this.getData();
         
-        this.data.push({
+        existStorage.push({
             user: user,
             message: message
         });
         
-        localStorage.setItem('msg', JSON.stringify({
-            data: this.data
+        localStorage.setItem('messages', JSON.stringify({
+            data: existStorage
         }));
-        
-        this.getData();
     }
 
     getData() {
 
-        let messageList = [
-            {
-                user: "Василий Пупкин",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
-            },
-            {
-                user: "Вы",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: true
-            },
-            {
-                user: "Василий Пупкин",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
-            },
-            {
-                user: "Василий Пупкин",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
-            },
-            {
-                user: "Вы",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: true
-            }
-        ];
+        let data = localStorage.getItem('messages');
 
-        this.data = messageList;
+        if (!data) {
+            return this.data;
+        }
 
+        try {
+            data = JSON.parse(data);
+            console.log(data);
+        } catch(err) {
+            console.error('invalid data');
+            return false;
+        }
+
+        this.data = data.data;
         return this.data;
     }
 

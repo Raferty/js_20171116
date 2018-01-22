@@ -5,7 +5,7 @@ export default class Button extends Block {
     constructor(node, options = {}) {
         super(node, options);
 
-        this.node.addEventListener('click', () => { this.onClick(); })
+        this.node.addEventListener('click', () => { this.onClick(); });
     }
 
     render() {

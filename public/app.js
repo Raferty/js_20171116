@@ -380,6 +380,11 @@ var User = function () {
                 name: this.name
             }));
         }
+    }, {
+        key: 'delete',
+        value: function _delete() {
+            localStorage.removeItem('user');
+        }
     }], [{
         key: 'load',
         value: function load() {
@@ -523,48 +528,39 @@ var Data = function () {
     }
 
     _createClass(Data, [{
-        key: "setData",
+        key: 'setData',
         value: function setData(user, message) {
 
-            this.data.push({
+            var existStorage = this.getData();
+
+            existStorage.push({
                 user: user,
                 message: message
             });
 
-            console.log(this.data);
-
-            localStorage.setItem('msg', JSON.stringify({
-                data: this.data
+            localStorage.setItem('messages', JSON.stringify({
+                data: existStorage
             }));
         }
     }, {
-        key: "getData",
+        key: 'getData',
         value: function getData() {
 
-            var messageList = [{
-                user: "Василий Пупкин",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
-            }, {
-                user: "Вы",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: true
-            }, {
-                user: "Василий Пупкин",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
-            }, {
-                user: "Василий Пупкин",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: false
-            }, {
-                user: "Вы",
-                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                isOwner: true
-            }];
+            var data = localStorage.getItem('messages');
 
-            this.data = messageList;
+            if (!data) {
+                return this.data;
+            }
 
+            try {
+                data = JSON.parse(data);
+                console.log(data);
+            } catch (err) {
+                console.error('invalid data');
+                return false;
+            }
+
+            this.data = data.data;
             return this.data;
         }
     }]);
@@ -1133,9 +1129,11 @@ var About = function (_View) {
 
         var _this = _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).call(this, node));
 
+        var title = 'About chat';
         var text = 'Online chat may refer to any kind of communication over the Internet that offers a real-time transmission of text messages from sender to receiver. Chat messages are generally short in order to enable other participants to respond quickly. Thereby, a feeling similar to a spoken conversation is created, which distinguishes chatting from other text-based online communication forms such as Internet forums and email. Online chat may address point-to-point communications as well as multicast communications from one sender to many receivers and voice and video chat, or may be a feature of a web conferencing service.';
 
         _this.node.innerHTML = (0, _about2.default)({
+            title: title,
             text: text
         });
 
@@ -1206,9 +1204,7 @@ var Auth = function (_View) {
         var model = _user2.default.load();
 
         if (model) {
-            location.href = './' + location.hash;
-        } else {
-            location.href = './#auth';
+            location.href = './#chat';
         }
 
         _this.button = new _button2.default(_this.node.querySelector('.js-submit'), {
@@ -1245,6 +1241,17 @@ var Auth = function (_View) {
 
             location.href = './#chat';
         }
+
+        /* Logout method */
+        // logout() {
+        //     let model = User.load();
+
+        //     if(model) {
+        //         model.delete();
+        //         location.href = './#auth';
+        //     }
+        // }
+
     }]);
 
     return Auth;
@@ -1260,7 +1267,7 @@ exports.default = Auth;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+        value: true
 });
 
 var _view = __webpack_require__(3);
@@ -1292,30 +1299,30 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Chat = function (_View) {
-    _inherits(Chat, _View);
+        _inherits(Chat, _View);
 
-    function Chat(node) {
-        _classCallCheck(this, Chat);
+        function Chat(node) {
+                _classCallCheck(this, Chat);
 
-        var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, node));
+                var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, node));
 
-        _this.node.innerHTML = (0, _chat2.default)();
+                _this.node.innerHTML = (0, _chat2.default)();
 
-        var model = _user2.default.load();
+                var model = _user2.default.load();
 
-        if (!model) {
-            location.href = './#auth';
+                if (!model) {
+                        location.href = './#auth';
+                }
+
+                _this.form = new _messageCreate2.default(document.querySelector('.js-form'));
+                _this.form.render();
+
+                _this.messages = new _message2.default(_this.node.querySelector('.js-list'));
+                _this.messages.render();
+                return _this;
         }
 
-        _this.form = new _messageCreate2.default(document.querySelector('.js-form'));
-        _this.form.render();
-
-        _this.messages = new _message2.default(_this.node.querySelector('.js-list'));
-        _this.messages.render();
-        return _this;
-    }
-
-    return Chat;
+        return Chat;
 }(_view2.default);
 
 exports.default = Chat;
@@ -1457,6 +1464,20 @@ var CreateMsg = function (_Block) {
             this.button.onClick = function () {
                 _this2.send();
             };
+
+            window.addEventListener("keyup", this.sendCtrlClick, false);
+        }
+    }, {
+        key: 'sendCtrlClick',
+        value: function sendCtrlClick(e) {
+            this.addEventListener('keydown', function (e) {
+
+                console.log(e);
+
+                if ((event.keyCode == 10 || event.keyCode == 13) && event.ctrlKey) {
+                    var crateMsg = CreateMsg.send();
+                }
+            }, true);
         }
     }, {
         key: 'send',
@@ -1468,6 +1489,8 @@ var CreateMsg = function (_Block) {
             this.data.setData(user.name, message);
 
             this.textarea.clear();
+            this.data.getData();
+            location.reload();
         }
     }]);
 
@@ -1529,7 +1552,7 @@ var Message = function (_Block) {
             var data = this.data.getData();
 
             this.node.innerHTML = (0, _message2.default)({
-                data: data
+                messages: data
             });
         }
     }]);
@@ -1774,42 +1797,32 @@ module.exports = template;
 
 var pug = __webpack_require__(1);
 
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (data) {pug_mixins["messageItemRecieve"] = pug_interp = function(msg){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Cdiv class=\"message message_receive\"\u003E\u003Cdiv class=\"message__header\"\u003E" + (pug.escape(null == (pug_interp = msg.user) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Cdiv class=\"message__body\"\u003E" + (pug.escape(null == (pug_interp = msg.message) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
-};
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (messages) {
+
+
+
 pug_mixins["messageItemSend"] = pug_interp = function(msg){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Cdiv class=\"message message_send\"\u003E\u003Cdiv class=\"message__header\"\u003E" + (pug.escape(null == (pug_interp = msg.user) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Cdiv class=\"message__body\"\u003E" + (pug.escape(null == (pug_interp = msg.message) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
 };
-// iterate data
+// iterate messages
 ;(function(){
-  var $$obj = data;
+  var $$obj = messages;
   if ('number' == typeof $$obj.length) {
       for (var pug_index0 = 0, $$l = $$obj.length; pug_index0 < $$l; pug_index0++) {
         var msg = $$obj[pug_index0];
-if (msg.isOwner) {
-pug_mixins["messageItemRecieve"](msg);
-}
-else {
 pug_mixins["messageItemSend"](msg);
-}
       }
   } else {
     var $$l = 0;
     for (var pug_index0 in $$obj) {
       $$l++;
       var msg = $$obj[pug_index0];
-if (msg.isOwner) {
-pug_mixins["messageItemRecieve"](msg);
-}
-else {
 pug_mixins["messageItemSend"](msg);
-}
     }
   }
 }).call(this);
-}.call(this,"data" in locals_for_with?locals_for_with.data:typeof data!=="undefined"?data:undefined));;return pug_html;};
+}.call(this,"messages" in locals_for_with?locals_for_with.messages:typeof messages!=="undefined"?messages:undefined));;return pug_html;};
 module.exports = template;
 
 /***/ }),
@@ -1818,7 +1831,7 @@ module.exports = template;
 
 var pug = __webpack_require__(1);
 
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (text) {pug_html = pug_html + "\u003Cdiv class=\"about\"\u003E\u003Cp class=\"about__p\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E";}.call(this,"text" in locals_for_with?locals_for_with.text:typeof text!=="undefined"?text:undefined));;return pug_html;};
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (text, title) {pug_html = pug_html + "\u003Cdiv class=\"about\"\u003E\u003Ch2 class=\"about__h\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh2\u003E\u003Cp class=\"about__p\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E";}.call(this,"text" in locals_for_with?locals_for_with.text:typeof text!=="undefined"?text:undefined,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined));;return pug_html;};
 module.exports = template;
 
 /***/ }),
@@ -1836,7 +1849,7 @@ module.exports = template;
 
 var pug = __webpack_require__(1);
 
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"chat\"\u003E\u003Cdiv class=\"chat__container\"\u003E\u003Cdiv class=\"chat__header\"\u003E\u003Ca class=\"link js-link-about\" href=\"#about\"\u003EAbout chat\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"chat__inner js-list\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"chat__footer js-form\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"chat\"\u003E\u003Cdiv class=\"chat__container\"\u003E\u003Cdiv class=\"chat__logout js-logout\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"chat__header\"\u003E\u003Ca class=\"link js-link-about\" href=\"#about\"\u003EAbout chat\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"chat__inner js-list\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"chat__footer js-form\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
 module.exports = template;
 
 /***/ }),

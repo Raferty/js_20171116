@@ -8,8 +8,6 @@ mixin messageItemSend(msg)
 		div.message__header= msg.user
 		div.message__body= msg.message
 
-for msg in data
-	if msg.isOwner
-		+messageItemRecieve(msg)
-	else
-		+messageItemSend(msg)
+for msg in messages
+	+messageItemSend(msg)
+		

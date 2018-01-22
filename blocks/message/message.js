@@ -8,7 +8,7 @@ export default class Message extends Block {
     
     constructor(node, options = {}) {
         super(node, options);
-
+        
     }
     
     render() {
@@ -16,8 +16,10 @@ export default class Message extends Block {
         let data = this.data.getData();
 
         this.node.innerHTML = template({
-            data: data
+            messages: data
         });
+
+        
     }
     
 }

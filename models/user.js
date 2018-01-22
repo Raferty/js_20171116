@@ -10,6 +10,10 @@ export default class User {
         }));
     }
 
+    delete() {
+        localStorage.removeItem('user');
+    }
+
     static load() {
         let data = localStorage.getItem('user');
 

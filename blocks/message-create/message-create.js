@@ -32,16 +32,32 @@ export default class CreateMsg extends Block {
         this.button.render();
         
         this.button.onClick = () => { this.send() };
+
+        window.addEventListener("keyup", this.sendCtrlClick, false);
+
+    }
+
+    sendCtrlClick(e) {
+            this.addEventListener('keydown', function(e) { 
+
+            console.log(e);
+
+            if ((event.keyCode == 10 || event.keyCode == 13) && event.ctrlKey) {                
+               let crateMsg = CreateMsg.send();
+            }
+        }, true);
     }
     
     send() {
-        
+
         let user = User.load();
         let message = this.textarea.getValue();
         
         this.data.setData(user.name, message);
-        
+
         this.textarea.clear();
+        this.data.getData();
+        location.reload();
     }
     
 }

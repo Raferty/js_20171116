@@ -34,8 +34,7 @@ export default class Data {
             return false;
         }
 
-        this.data = data.data;
-        return this.data;
+        return data.data;
     }
 
 }

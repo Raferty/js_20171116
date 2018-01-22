@@ -560,8 +560,7 @@ var Data = function () {
                 return false;
             }
 
-            this.data = data.data;
-            return this.data;
+            return data.data;
         }
     }]);
 
@@ -1256,7 +1255,7 @@ exports.default = Auth;
 
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+    value: true
 });
 
 var _view = __webpack_require__(3);
@@ -1288,30 +1287,30 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Chat = function (_View) {
-        _inherits(Chat, _View);
+    _inherits(Chat, _View);
 
-        function Chat(node) {
-                _classCallCheck(this, Chat);
+    function Chat(node) {
+        _classCallCheck(this, Chat);
 
-                var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, node));
+        var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, node));
 
-                _this.node.innerHTML = (0, _chat2.default)();
+        _this.node.innerHTML = (0, _chat2.default)();
 
-                var model = _user2.default.load();
+        var model = _user2.default.load();
 
-                if (!model) {
-                        location.href = './#auth';
-                }
-
-                _this.form = new _messageCreate2.default(document.querySelector('.js-form'));
-                _this.form.render();
-
-                _this.messages = new _message2.default(_this.node.querySelector('.js-list'));
-                _this.messages.render();
-                return _this;
+        if (!model) {
+            location.href = './#auth';
         }
 
-        return Chat;
+        _this.form = new _messageCreate2.default(document.querySelector('.js-form'));
+        _this.form.render();
+
+        _this.messages = new _message2.default(_this.node.querySelector('.js-list'));
+        _this.messages.render();
+        return _this;
+    }
+
+    return Chat;
 }(_view2.default);
 
 exports.default = Chat;

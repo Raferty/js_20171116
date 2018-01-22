@@ -18,10 +18,6 @@ export default class Router {
             this.show(location.hash.replace('#', ''));
         });
 
-        window.addEventListener('load', () => {
-            this.show(location.hash.replace('#', ''));
-        });
-
         this.show(location.hash.replace('#', ''));
     }
 

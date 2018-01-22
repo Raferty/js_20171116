@@ -195,7 +195,8 @@ header {
 .about {
     width: 600px;
     padding: 30px;
-    margin: 50px auto;
+    margin: 0 auto;
+    margin-top: 150px;
     background: #f2f6f9;
     border-radius: 5px;
 }

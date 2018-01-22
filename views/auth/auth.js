@@ -48,14 +48,4 @@ export default class Auth extends View {
         location.href = './#chat';
     }
 
-    /* Logout method */
-    // logout() {
-    //     let model = User.load();
-
-    //     if(model) {
-    //         model.delete();
-    //         location.href = './#auth';
-    //     }
-    // }
-
 }

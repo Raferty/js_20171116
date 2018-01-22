@@ -5,4 +5,8 @@
 
 .button_msg {
 	color: #94c3ed;
+
+	&:hover {
+		color: #68b0f0;
+	}
 }

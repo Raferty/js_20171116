@@ -17,6 +17,8 @@ export default class About extends View {
         });
 
         let model = User.load();
+        
+        console.log(model);
 
         if (!model) {
             location.href = './#auth';

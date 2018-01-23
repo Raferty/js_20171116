@@ -301,7 +301,7 @@ function pug_rethrow(err, filename, lineno, str){
     throw err;
   }
   try {
-    str = str || __webpack_require__(29).readFileSync(filename, 'utf8')
+    str = str || __webpack_require__(32).readFileSync(filename, 'utf8')
   } catch (ex) {
     pug_rethrow(err, null, lineno)
   }
@@ -512,70 +512,6 @@ exports.default = Button;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Data = function () {
-    function Data() {
-        _classCallCheck(this, Data);
-
-        this.data = [];
-    }
-
-    _createClass(Data, [{
-        key: 'setData',
-        value: function setData(user, message) {
-
-            var existStorage = this.getData();
-
-            existStorage.push({
-                user: user,
-                message: message
-            });
-
-            localStorage.setItem('messages', JSON.stringify({
-                data: existStorage
-            }));
-        }
-    }, {
-        key: 'getData',
-        value: function getData() {
-
-            var data = localStorage.getItem('messages');
-
-            if (!data) {
-                return this.data;
-            }
-
-            try {
-                data = JSON.parse(data);
-                console.log(data);
-            } catch (err) {
-                console.error('invalid data');
-                return false;
-            }
-
-            return data.data;
-        }
-    }]);
-
-    return Data;
-}();
-
-exports.default = Data;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 /*
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
@@ -652,7 +588,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -698,7 +634,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(18);
+var	fixUrls = __webpack_require__(19);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1011,6 +947,70 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Data = function () {
+    function Data() {
+        _classCallCheck(this, Data);
+
+        this.data = [];
+    }
+
+    _createClass(Data, [{
+        key: 'setData',
+        value: function setData(user, message) {
+
+            var existStorage = this.getData();
+
+            existStorage.push({
+                user: user,
+                message: message
+            });
+
+            localStorage.setItem('messages', JSON.stringify({
+                data: existStorage
+            }));
+        }
+    }, {
+        key: 'getData',
+        value: function getData() {
+
+            var data = localStorage.getItem('messages');
+
+            if (!data) {
+                return this.data;
+            }
+
+            try {
+                data = JSON.parse(data);
+                console.log(data);
+            } catch (err) {
+                console.error('invalid data');
+                return false;
+            }
+
+            return data.data;
+        }
+    }]);
+
+    return Data;
+}();
+
+exports.default = Data;
+
+/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1049,10 +1049,6 @@ var Router = function () {
             console.log('start', this.routes);
 
             window.addEventListener('hashchange', function () {
-                _this.show(location.hash.replace('#', ''));
-            });
-
-            window.addEventListener('load', function () {
                 _this.show(location.hash.replace('#', ''));
             });
 
@@ -1104,7 +1100,7 @@ var _view = __webpack_require__(3);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _about = __webpack_require__(23);
+var _about = __webpack_require__(25);
 
 var _about2 = _interopRequireDefault(_about);
 
@@ -1138,6 +1134,8 @@ var About = function (_View) {
 
         var model = _user2.default.load();
 
+        console.log(model);
+
         if (!model) {
             location.href = './#auth';
         }
@@ -1166,9 +1164,13 @@ var _view = __webpack_require__(3);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _auth = __webpack_require__(24);
+var _auth = __webpack_require__(26);
 
 var _auth2 = _interopRequireDefault(_auth);
+
+var _auth3 = __webpack_require__(31);
+
+var _auth4 = _interopRequireDefault(_auth3);
 
 var _button = __webpack_require__(4);
 
@@ -1181,6 +1183,10 @@ var _input2 = _interopRequireDefault(_input);
 var _user = __webpack_require__(2);
 
 var _user2 = _interopRequireDefault(_user);
+
+var _auth5 = __webpack_require__(18);
+
+var _auth6 = _interopRequireDefault(_auth5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1216,11 +1222,17 @@ var Auth = function (_View) {
             placeholder: 'Введите имя'
         });
 
+        _this.inputEmail = new _input2.default(_this.node.querySelector('.js-email'), {
+            value: '',
+            placeholder: 'example@domain.com'
+        });
+
         _this.input.render();
+        _this.inputEmail.render();
         _this.button.render();
 
         _this.button.onClick = function () {
-            _this.login();
+            _this.validate();
         };
         return _this;
     }
@@ -1239,6 +1251,16 @@ var Auth = function (_View) {
             model.save();
 
             location.href = './#chat';
+        }
+    }, {
+        key: 'validate',
+        value: function validate() {
+
+            this.user = 'test';
+            this.message = 'we';
+
+            this.userList = new _auth6.default();
+            this.userList.create('alex', 'text text');
         }
     }]);
 
@@ -1262,7 +1284,7 @@ var _view = __webpack_require__(3);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _chat = __webpack_require__(25);
+var _chat = __webpack_require__(27);
 
 var _chat2 = _interopRequireDefault(_chat);
 
@@ -1332,7 +1354,7 @@ var _view = __webpack_require__(3);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _logout = __webpack_require__(26);
+var _logout = __webpack_require__(28);
 
 var _logout2 = _interopRequireDefault(_logout);
 
@@ -1470,7 +1492,7 @@ var _button = __webpack_require__(4);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _data = __webpack_require__(5);
+var _data = __webpack_require__(7);
 
 var _data2 = _interopRequireDefault(_data);
 
@@ -1478,11 +1500,11 @@ var _user = __webpack_require__(2);
 
 var _user2 = _interopRequireDefault(_user);
 
-var _messageCreate = __webpack_require__(21);
+var _messageCreate = __webpack_require__(23);
 
 var _messageCreate2 = _interopRequireDefault(_messageCreate);
 
-__webpack_require__(27);
+__webpack_require__(29);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1567,13 +1589,13 @@ var _block = __webpack_require__(1);
 
 var _block2 = _interopRequireDefault(_block);
 
-var _message = __webpack_require__(22);
+var _message = __webpack_require__(24);
 
 var _message2 = _interopRequireDefault(_message);
 
-__webpack_require__(28);
+__webpack_require__(30);
 
-var _data = __webpack_require__(5);
+var _data = __webpack_require__(7);
 
 var _data2 = _interopRequireDefault(_data);
 
@@ -1724,6 +1746,95 @@ window.addEventListener('DOMContentLoaded', function () {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var KEY = "5a678a527d7ef24c5cf08ee6";
+var URL = "https://testdb-41d5.restdb.io/rest/messages";
+
+//const KEY = "59c92ddf04067cfd77ad9ac4";
+//const URL = "https://js20170727quiz-9acd.restdb.io/rest/messages";
+
+var Authorization = function () {
+    function Authorization() {
+        _classCallCheck(this, Authorization);
+    }
+
+    _createClass(Authorization, [{
+        key: "fetch",
+        value: function fetch() {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', URL);
+
+            xhr.addEventListener('readystatechange', function () {
+
+                if (xhr.readyState === 4) {
+
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                    } catch (err) {
+                        console.error(err);
+                    }
+                }
+            });
+
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.setRequestHeader("x-apikey", KEY);
+            xhr.setRequestHeader("cache-control", "no-cache");
+
+            xhr.send();
+        }
+    }, {
+        key: "create",
+        value: function create(author, text) {
+
+            var data = JSON.stringify({
+                "author": author,
+                "text": text
+            });
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('POST', URL);
+
+            xhr.addEventListener('readystatechange', function () {
+
+                if (xhr.readyState === 4) {
+
+                    try {
+                        console.log('sent');
+                    } catch (err) {
+                        console.error(err);
+                    }
+                }
+            });
+
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.setRequestHeader("x-apikey", KEY);
+            xhr.setRequestHeader("cache-control", "no-cache");
+
+            xhr.send(data);
+        }
+    }]);
+
+    return Authorization;
+}();
+
+exports.default = Authorization;
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /**
  * When source maps are enabled, `style-loader` uses a link element with a data-uri to
  * embed the css on the page. This breaks all relative urls because now they are relative to a
@@ -1813,10 +1924,10 @@ module.exports = function (css) {
 };
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -1827,10 +1938,10 @@ exports.push([module.i, ".message-create__submit {\n  margin-top: 10px;\n  text-
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -1841,7 +1952,21 @@ exports.push([module.i, ".message {\n  margin-bottom: 30px; }\n\n.message__heade
 
 
 /***/ }),
-/* 21 */
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".auth {\n  width: 600px;\n  padding: 30px 90px;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  background: #f2f6f9;\n  border-radius: 5px; }\n\n.auth__header {\n  font-size: 24px;\n  text-align: center;\n  margin-bottom: 20px; }\n\n.auth__name {\n  margin-bottom: 20px; }\n\n.auth__email {\n  margin-bottom: 20px; }\n\n.button_auth {\n  color: #fff;\n  padding: 15px;\n  width: 100%;\n  background: #f0916d;\n  border-radius: 5px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(0);
@@ -1850,7 +1975,7 @@ function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_ht
 module.exports = template;
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(0);
@@ -1884,7 +2009,7 @@ pug_mixins["messageItemSend"](msg);
 module.exports = template;
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(0);
@@ -1893,16 +2018,16 @@ function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var l
 module.exports = template;
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(0);
 
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"auth\"\u003E\u003Cdiv class=\"auth__name js-name\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"auth__submit js-submit\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"auth\"\u003E\u003Cdiv class=\"auth__header\"\u003EАвторизация\u003C\u002Fdiv\u003E\u003Cdiv class=\"auth__name js-name\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"auth__email js-email\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"auth__submit js-submit\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
 module.exports = template;
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(0);
@@ -1911,7 +2036,7 @@ function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_ht
 module.exports = template;
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(0);
@@ -1920,13 +2045,13 @@ function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_ht
 module.exports = template;
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(19);
+var content = __webpack_require__(20);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1934,7 +2059,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(7)(content, options);
+var update = __webpack_require__(6)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -1951,13 +2076,13 @@ if(false) {
 }
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(20);
+var content = __webpack_require__(21);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1965,7 +2090,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(7)(content, options);
+var update = __webpack_require__(6)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -1982,7 +2107,38 @@ if(false) {
 }
 
 /***/ }),
-/* 29 */
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(22);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(6)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./auth.scss", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./auth.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 32 */
 /***/ (function(module, exports) {
 
 /* (ignored) */

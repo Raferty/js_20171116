@@ -1,10 +1,12 @@
 import View from '../view';
 import template from './auth.pug';
+import styles from './auth.scss';
 
 import Button from '../../blocks/button/button';
 import Input from '../../blocks/input/input';
 
 import User from '../../models/user';
+import Authorization from '../../models/auth';
 
 export default class Auth extends View {
 
@@ -27,11 +29,18 @@ export default class Auth extends View {
             value: '',
             placeholder: 'Введите имя'
         });
+        
+        this.inputEmail = new Input(this.node.querySelector('.js-email'), {
+            value: '',
+            placeholder: 'example@domain.com'
+        });
 
         this.input.render();
+        this.inputEmail.render();
         this.button.render();
         
-        this.button.onClick = () => { this.login() };
+        
+        this.button.onClick = () => { this.validate(); };
     }
 
     login() {
@@ -47,5 +56,14 @@ export default class Auth extends View {
 
         location.href = './#chat';
     }
-
+    
+    validate() {
+        
+        this.user = 'test';
+        this.message = 'we';
+        
+        this.userList = new Authorization();        
+        this.userList.create('alex', 'text text');
+        
+    }
 }

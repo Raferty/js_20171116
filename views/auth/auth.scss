@@ -1,0 +1,31 @@
+.auth {
+    width: 600px;
+    padding: 30px 90px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #f2f6f9;
+    border-radius: 5px;
+}
+
+.auth__header {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.auth__name {
+    margin-bottom: 20px;
+}
+.auth__email {
+    margin-bottom: 20px;
+}
+.auth__submit {}
+
+.button_auth {
+    color: #fff;
+    padding: 15px;
+    width: 100%;
+    background: #f0916d;
+    border-radius: 5px;
+}
